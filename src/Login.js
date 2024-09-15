@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,10 +12,22 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const validToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+
+  const authenticateUser = (data) => {
+    const token = validToken;
+
+    if (token === validToken) {
+      alert("Login Successful!");
+      navigate("/userlist");
+    } else {
+      alert("Invalid Token");
+    }
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
-    alert("Login Successful!");
-    navigate("/userlist");
+    authenticateUser(data);
   };
 
   return (
