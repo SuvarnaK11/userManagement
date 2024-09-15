@@ -3,6 +3,7 @@ import Login from "./Login.js";
 import UserList from "./UserList.js";
 import CreateUser from "./CreateUser.js";
 import EditUser from "./EditUser.js";
+import FilePreview from "./FilePreview.js";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/userlist" element={<UserList />} />
         <Route path="/create-user" element={<CreateUser />} />
         <Route path="/edit-user/:id" element={<EditUser />} />
+        <Route path="/file-preview/:index" element={<FilePreview />} />
       </Routes>
     </Router>
   );

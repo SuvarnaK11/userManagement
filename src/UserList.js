@@ -15,6 +15,7 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -111,6 +112,16 @@ const UserList = () => {
                     onClick={() => handleEdit(user.id)}
                   >
                     Edit
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    component={Link}
+                    to={`/file-preview/${user.id}`}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Files
                   </Button>
                 </TableCell>
               </TableRow>
