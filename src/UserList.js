@@ -68,6 +68,10 @@ const UserList = () => {
     navigate("/create-user");
   };
 
+  const handleEdit = (id) => {
+    navigate(`/edit-user/${id}`);
+  };
+
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" gutterBottom>
@@ -87,6 +91,7 @@ const UserList = () => {
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
               <TableCell>Email</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,6 +104,15 @@ const UserList = () => {
                 <TableCell>{user.first_name}</TableCell>
                 <TableCell>{user.last_name}</TableCell>
                 <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  {" "}
+                  <Button
+                    variant="contained"
+                    onClick={() => handleEdit(user.id)}
+                  >
+                    Edit
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

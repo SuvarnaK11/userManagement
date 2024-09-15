@@ -14,3 +14,7 @@ export const get = (url, params = {}) => {
 export const post = (url, params = {}) => {
   return apiClient.get(url, { params });
 };
+
+export const put = (url, params = {}) => {
+  return apiClient.get(url, { params });
+};

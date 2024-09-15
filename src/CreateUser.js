@@ -10,11 +10,12 @@ import {
 } from "@mui/material";
 
 const CreateUser = () => {
-  const [name, setName] = useState("");
-  const [job, setJob] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,11 +24,12 @@ const CreateUser = () => {
     setSuccess(null);
 
     try {
-      const response = await post("/users", { name, job });
+      const response = await post("/users", { firstName, lastName, email });
       console.log("User Created:", response.data);
       setSuccess("User created successfully!");
-      setName("");
-      setJob("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
     } catch (error) {
       console.error("Failed to create user:", error);
       setError("Failed to create user");
@@ -45,21 +47,30 @@ const CreateUser = () => {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="Name"
+            label="First Name"
             variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </Box>
         <Box mb={2}>
           <TextField
             fullWidth
-            label="Job"
+            label="Last Name"
             variant="outlined"
-            value={job}
-            onChange={(e) => setJob(e.target.value)}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             required
+          />
+        </Box>
+        <Box mb={2}>
+          <TextField
+            fullWidth
+            label="Email"
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Box>
         <Box mt={2}>
