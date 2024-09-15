@@ -2,7 +2,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();

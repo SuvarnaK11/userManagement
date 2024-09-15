@@ -10,3 +10,7 @@ const apiClient = axios.create({
 export const get = (url, params = {}) => {
   return apiClient.get(url, { params });
 };
+
+export const post = (url, params = {}) => {
+  return apiClient.get(url, { params });
+};

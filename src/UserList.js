@@ -12,27 +12,20 @@ import {
   Paper,
   Avatar,
   TableContainer,
-  TablePagination,
+  Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(6); // Default to 6 users per page (as per the API)
-  const [totalUsers, setTotalUsers] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    // Fetch users from the API
     const fetchUsers = async () => {
       try {
-        const response = await get("/users", {
-          page: page + 1,
-          per_page: rowsPerPage,
-        });
-        setUsers(response.data.data); // Data is inside response.data.data
-        setTotalUsers(response.data.total); // Total number of users
+        const response = await get("/users");
+        setUsers(response?.data?.data);
         setLoading(false);
       } catch (error) {
         setError("Failed to fetch users");
@@ -41,16 +34,7 @@ const UserList = () => {
     };
 
     fetchUsers();
-  }, [page, rowsPerPage]); // Refetch whenever page or rows per page changes
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reset to first page
-  };
+  }, []);
 
   if (loading) {
     return (
@@ -80,11 +64,20 @@ const UserList = () => {
     );
   }
 
+  const handleCreate = () => {
+    navigate("/create-user");
+  };
+
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" gutterBottom>
         User List
       </Typography>
+      <Box sx={{ padding: 2 }}>
+        <Button variant="contained" onClick={handleCreate}>
+          Create New User
+        </Button>
+      </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -97,7 +90,7 @@ const UserList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user) => (
+            {users?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>
@@ -111,14 +104,6 @@ const UserList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        component="div"
-        count={totalUsers} // Total number of users
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Box>
   );
 };
